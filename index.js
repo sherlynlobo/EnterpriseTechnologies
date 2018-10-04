@@ -1,3 +1,7 @@
+//Author: Sherlyn Lobo
+//Student Id: 301013071
+//Program : Mobile Application Development
+//Enterprise Technologies Assignment 1
 var SERVER_NAME = 'product-api'
 var PORT = process.env.PORT || 8080;
 var HOST = '127.0.0.1';
