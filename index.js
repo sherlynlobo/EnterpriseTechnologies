@@ -1,9 +1,10 @@
 var SERVER_NAME = 'product-api'
-var PORT = 8080;
+var PORT = process.env.PORT || 8080;
 var HOST = '127.0.0.1';
-var counterGet = 0;
-var counterPost = 0;
-var counterDel = 0;
+
+var counterGet = 0; //counter variable for get
+var counterPost = 0; //counter variable for post
+var counterDel = 0;  //counter variable for delete
 
 var restify = require('restify')
 
@@ -13,7 +14,7 @@ var restify = require('restify')
   // Create the restify server
   , server = restify.createServer({ name: SERVER_NAME})
 
-  server.listen(PORT, HOST, function () {
+  server.listen(PORT, function () {
   console.log('Server %s listening at %s', server.name, server.url)
   console.log('Resources:')
   console.log(' /products')
