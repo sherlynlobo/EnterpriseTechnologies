@@ -47,25 +47,7 @@ server.get('/accounts', function (req, res, next) {
 })
 
 // Get a single account by their account id
-/*
-server.get('/accounts/:id', function (req, res, next) {
-  
-  // Find a single account by their id within save
-  accountsSave.findOne({ _id: req.params.id }, function (error, account) {
 
-    // If there are any errors, pass them to next in the correct format
-    if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
-
-    if (account) {
-      // Send the account if no issues
-      res.send(account)
-    } else {
-      // Send 404 header if the account doesn't exist
-      res.send(404)
-    }
-  })
-})
-*/
 // Create a new account
 
 server.post('/accounts', function (req, res, next) {
@@ -73,18 +55,7 @@ server.post('/accounts', function (req, res, next) {
   counterPost++;
   console.log("Post Count :"+counterPost);
 
-/*
-  // Make sure account is defined
-  if (req.params.account === undefined ) {
-    // If there are any errors, pass them to next in the correct format
-    return next(new restify.InvalidArgumentError('account must be given'))
-  }
-  if (req.params.name === undefined ) {
-    // If there are any errors, pass them to next in the correct format
-    return next(new restify.InvalidArgumentError('name must be given'))
-  }
 
-  */
   var newaccount = {
 		account: req.params.account, 
 		name: req.params.name
@@ -100,55 +71,7 @@ server.post('/accounts', function (req, res, next) {
     res.send(201, account)
   })
 })
-/*
-// Update a account by their id
-server.put('/accounts/:id', function (req, res, next) {
 
-  // Make sure name is defined
-  if (req.params.account === undefined ) {
-    // If there are any errors, pass them to next in the correct format
-    return next(new restify.InvalidArgumentError('account must be given'))
-  }
-  if (req.params.name === undefined ) {
-    // If there are any errors, pass them to next in the correct format
-    return next(new restify.InvalidArgumentError('name must be given'))
-  }
-  
-  var newaccount = {
-		_id: req.params.id,
-		account: req.params.account, 
-		name: req.params.name
-	}
-  
-  // Update the account with the persistence engine
-  accountsSave.update(newaccount, function (error, account) {
-
-    // If there are any errors, pass them to next in the correct format
-    if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
-
-    // Send a 200 OK response
-    res.send(200)
-  })
-})
-
-*/
-/*
-// Delete account with the given id
-server.del('/accounts/:id', function (req, res, next) {
-  counterDel++;
-  console.log("Delete Count :"+counterDel);
-
-  // Delete the account with the persistence engine
-  accountsSave.delete(req.params.id, function (error, account) {
-
-    // If there are any errors, pass them to next in the correct format
-    if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
-
-    // Send a 200 OK response
-    res.send()
-  })
-})
-*/
 server.del('/accounts', function (req, res, next) {
   counterDel++;
   console.log("Delete Count :"+counterDel);
