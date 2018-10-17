@@ -1,15 +1,25 @@
 {
-    "name": "productApi",
-    "version": "1.0.0",
-    "description": "REST API - products",
-    "dependencies": {
-        "restify": "^4.1.1",
-        "save": "2.3.0"
-    },
-    "author": "zvbox",
-    "private": true,
-    "main": "index.js",
-    "scripts": {
-        "start": "node index.js"
-    }
+  "name": "accountapi",
+  "version": "1.0.0",
+  "description": "REST API - accounts",
+  "dependencies": {
+    "restify": "^4.1.1",
+    "save": "2.3.0"
+  },
+  "author": "zvbox",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sherlynlobo/EnterpriseTechnologies.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sherlynlobo/EnterpriseTechnologies/issues"
+  },
+  "homepage": "https://github.com/sherlynlobo/EnterpriseTechnologies#readme"
 }

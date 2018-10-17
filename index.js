@@ -2,7 +2,7 @@
 //Student Id: 301013071
 //Program : Mobile Application Development
 //Enterprise Technologies Assignment 1
-var SERVER_NAME = 'product-api'
+var SERVER_NAME = 'account-api'
 var PORT = process.env.PORT || 8080;
 var HOST = '127.0.0.1';
 
@@ -12,8 +12,8 @@ var counterDel = 0;  //counter variable for delete
 
 var restify = require('restify')
 
-  // Get a persistence engine for the products
-  , productsSave = require('save')('products')
+  // Get a persistence engine for the accounts
+  , accountsSave = require('save')('accounts')
 
   // Create the restify server
   , server = restify.createServer({ name: SERVER_NAME})
@@ -21,8 +21,8 @@ var restify = require('restify')
   server.listen(PORT, function () {
   console.log('Server %s listening at %s', server.name, server.url)
   console.log('Resources:')
-  console.log(' /products')
-  console.log(' /products/:id')  
+  console.log(' /accounts')
+  console.log(' /accounts/:id')  
 })
 
 server
@@ -32,94 +32,96 @@ server
   // Maps req.body to req.params so there is no switching between them
   .use(restify.bodyParser())
 
-// Get all products in the system
-server.get('/products', function (req, res, next) {
+// Get all accounts in the system
+server.get('/accounts', function (req, res, next) {
   console.log('-----> received request')  
   counterGet++;
   console.log("Get Count :"+counterGet);
 
   // Find every entity within the given collection
-  productsSave.find({}, function (error, products) {
+  accountsSave.find({}, function (error, accounts) {
 
-    // Return all of the products in the system
-    res.send(products)
+    // Return all of the accounts in the system
+    res.send(accounts)
   })
 })
 
-// Get a single product by their product id
-
-server.get('/products/:id', function (req, res, next) {
+// Get a single account by their account id
+/*
+server.get('/accounts/:id', function (req, res, next) {
   
-  // Find a single product by their id within save
-  productsSave.findOne({ _id: req.params.id }, function (error, product) {
+  // Find a single account by their id within save
+  accountsSave.findOne({ _id: req.params.id }, function (error, account) {
 
     // If there are any errors, pass them to next in the correct format
     if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
 
-    if (product) {
-      // Send the product if no issues
-      res.send(product)
+    if (account) {
+      // Send the account if no issues
+      res.send(account)
     } else {
-      // Send 404 header if the product doesn't exist
+      // Send 404 header if the account doesn't exist
       res.send(404)
     }
   })
 })
+*/
+// Create a new account
 
-// Create a new product
-
-server.post('/products', function (req, res, next) {
+server.post('/accounts', function (req, res, next) {
   console.log('---->  Response Sent')  
   counterPost++;
   console.log("Post Count :"+counterPost);
 
+/*
+  // Make sure account is defined
+  if (req.params.account === undefined ) {
+    // If there are any errors, pass them to next in the correct format
+    return next(new restify.InvalidArgumentError('account must be given'))
+  }
+  if (req.params.name === undefined ) {
+    // If there are any errors, pass them to next in the correct format
+    return next(new restify.InvalidArgumentError('name must be given'))
+  }
 
-  // Make sure product is defined
-  if (req.params.product === undefined ) {
-    // If there are any errors, pass them to next in the correct format
-    return next(new restify.InvalidArgumentError('Product must be given'))
-  }
-  if (req.params.price === undefined ) {
-    // If there are any errors, pass them to next in the correct format
-    return next(new restify.InvalidArgumentError('Price must be given'))
-  }
-  var newproduct = {
-		product: req.params.product, 
-		price: req.params.price
+  */
+  var newaccount = {
+		account: req.params.account, 
+		name: req.params.name
 	}
 
-  // Create the product using the persistence engine
-  productsSave.create( newproduct, function (error, product) {
+  // Create the account using the persistence engine
+  accountsSave.create( newaccount, function (error, account) {
 
     // If there are any errors, pass them to next in the correct format
     if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
 
-    // Send the product if no issues
-    res.send(201, product)
+    // Send the account if no issues
+    res.send(201, account)
   })
 })
-
-// Update a product by their id
-server.put('/products/:id', function (req, res, next) {
+/*
+// Update a account by their id
+server.put('/accounts/:id', function (req, res, next) {
 
   // Make sure name is defined
-  if (req.params.product === undefined ) {
+  if (req.params.account === undefined ) {
     // If there are any errors, pass them to next in the correct format
-    return next(new restify.InvalidArgumentError('product must be given'))
+    return next(new restify.InvalidArgumentError('account must be given'))
   }
-  if (req.params.price === undefined ) {
+  if (req.params.name === undefined ) {
     // If there are any errors, pass them to next in the correct format
-    return next(new restify.InvalidArgumentError('price must be given'))
+    return next(new restify.InvalidArgumentError('name must be given'))
   }
   
-  var newproduct = {
+  var newaccount = {
 		_id: req.params.id,
-		product: req.params.product, 
-		price: req.params.price
+		account: req.params.account, 
+		name: req.params.name
 	}
   
-  // Update the product with the persistence engine
-  productsSave.update(newproduct, function (error, product) {
+  // Update the account with the persistence engine
+  accountsSave.update(newaccount, function (error, account) {
 
     // If there are any errors, pass them to next in the correct format
     if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
@@ -129,13 +131,15 @@ server.put('/products/:id', function (req, res, next) {
   })
 })
 
-// Delete product with the given id
-server.del('/products/:id', function (req, res, next) {
+*/
+/*
+// Delete account with the given id
+server.del('/accounts/:id', function (req, res, next) {
   counterDel++;
   console.log("Delete Count :"+counterDel);
 
-  // Delete the product with the persistence engine
-  productsSave.delete(req.params.id, function (error, product) {
+  // Delete the account with the persistence engine
+  accountsSave.delete(req.params.id, function (error, account) {
 
     // If there are any errors, pass them to next in the correct format
     if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
@@ -144,19 +148,19 @@ server.del('/products/:id', function (req, res, next) {
     res.send()
   })
 })
-
-server.del('/products', function (req, res, next) {
+*/
+server.del('/accounts', function (req, res, next) {
   counterDel++;
   console.log("Delete Count :"+counterDel);
 
-  // Delete the product with the persistence engine
-  productsSave.deleteMany({}, function (error, product) {
+  // Delete the account with the persistence engine
+  accountsSave.deleteMany({}, function (error, account) {
 
     // If there are any errors, pass them to next in the correct format
     if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
 
     // Send a 200 OK response
-    res.send(200, "Products have been deleted")
+    res.send(200, "accounts have been deleted")
   })
 })
 
